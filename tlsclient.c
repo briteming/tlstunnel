@@ -40,7 +40,7 @@ struct FDCLIENT {
 struct FDCLIENT *remainfdclienthead = NULL;
 static int epollfd;
 SSL_CTX *ctx;
-unsigned char serverip[4] = {47, 91, 225, 92};
+unsigned char serverip[4] = {192, 168, 56, 101};
 
 int setsocketoption (int fd) {
     int flags = fcntl(fd, F_GETFL, 0);
@@ -532,8 +532,8 @@ int main () {
         return -4;
     }
     printf("KEY: %s, in %s, at %d\n", KEY, __FILE__, __LINE__);
-    printf("http代理地址为127.0.0.1:1082, in %s, at %d\n", __FILE__, __LINE__);
-    printf("socket5代理地址为127.0.0.1:1083, in %s, at %d\n", __FILE__, __LINE__);
+    printf("localip:1082 -> remoteip:8888, in %s, at %d\n", __FILE__, __LINE__);
+    printf("localip:1083 -> remoteip:8889, in %s, at %d\n", __FILE__, __LINE__);
     while (1) {
         static struct epoll_event evs[MAX_EVENT];
         int wait_count = epoll_wait(epollfd, evs, MAX_EVENT, -1);

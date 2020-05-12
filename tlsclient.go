@@ -22,7 +22,7 @@ func main () {
         log.Panic(err)
     }
 
-    go handleAcceptRequest(ln, "47.91.225.92:443")
+    go handleAcceptRequest(ln, "192.168.56.101:443")
 
     ln, err = net.Listen("tcp", ":1083")
     if err != nil {
@@ -31,8 +31,8 @@ func main () {
     defer ln.Close()
 
     log.Println("key:", key)
-    log.Println("http代理地址为127.0.0.1:1082")
-    log.Println("socket5代理地址为127.0.0.1:1083")
+    log.Println("localip:1082 -> remoteip:8888")
+    log.Println("localip:1083 -> remoteip:8889")
 
     for {
         client, err := ln.Accept()
@@ -40,7 +40,7 @@ func main () {
             log.Println(err)
             continue
         }
-        go handleClientRequest(client, "47.91.225.92:8443")
+        go handleClientRequest(client, "192.168.56.101:8443")
     }
 }
 
