@@ -8,7 +8,7 @@
 #include <openssl/ssl.h>
 #include <errno.h>
 
-#define KEY            "98kNLBdIphvpD9tl6NGZnTIUIh2rU2Km"
+#define KEY            "UKZTW4djUWZPbHjjBRRhlGT9QZPqFOiX"
 #define MAX_EVENT      1024
 #define MAX_CONNECT    1024
 
@@ -91,7 +91,6 @@ int setsocketoption (int fd) {
         close(fd);
         return -8;
     }
-    printf("old send buffer is %d, socksval_len:%d, fd:%d, in %s, at %d\n", socksval, socksval_len, fd,  __FILE__, __LINE__);
     socksval = MAXDATASIZE;
     if (setsockopt(fd, SOL_SOCKET, SO_SNDBUF, (unsigned char*)&socksval, sizeof (socksval))) {
         printf("set send buffer fail, fd:%d, in %s, at %d\n", fd,  __FILE__, __LINE__);
@@ -104,7 +103,6 @@ int setsocketoption (int fd) {
         close(fd);
         return -10;
     }
-    printf("new send buffer is %d, socksval_len:%d, fd:%d, in %s, at %d\n", socksval, socksval_len, fd,  __FILE__, __LINE__);
     // 修改接收缓冲区大小
     socksval_len = sizeof(socksval);
     if (getsockopt(fd, SOL_SOCKET, SO_RCVBUF, (unsigned char*)&socksval, &socksval_len)) {
@@ -112,7 +110,6 @@ int setsocketoption (int fd) {
         close(fd);
         return -11;
     }
-    printf("old receive buffer is %d, socksval_len:%d, fd:%d, in %s, at %d\n", socksval, socksval_len, fd,  __FILE__, __LINE__);
     socksval = MAXDATASIZE;
     if (setsockopt(fd, SOL_SOCKET, SO_RCVBUF, (char*)&socksval, sizeof(socksval))) {
         printf("set receive buffer fail, fd:%d, in %s, at %d\n", fd,  __FILE__, __LINE__);
@@ -125,7 +122,6 @@ int setsocketoption (int fd) {
         close(fd);
         return -13;
     }
-    printf("new receive buffer is %d, socksval_len:%d, fd:%d, in %s, at %d\n", socksval, socksval_len, fd,  __FILE__, __LINE__);
     return 0;
 }
 
