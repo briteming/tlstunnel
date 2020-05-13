@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <netdb.h>
-#include <arpa/inet.h>
+#include <netinet/tcp.h>
 #include <sys/epoll.h>
 #include <openssl/ssl.h>
 #include <errno.h>
