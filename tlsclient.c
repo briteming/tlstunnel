@@ -164,12 +164,6 @@ int create_socketfd (unsigned short port) {
         close(fd);
         return -3;
     }
-    int val = 6;
-    if (setsockopt(fd, SOL_TCP, TCP_DEFER_ACCEPT, &val, sizeof(val))) {
-        printf("set fd defer accept fail, fd:%d, in %s, at %d\n", fd,  __FILE__, __LINE__);
-        close(fd);
-        return -4;
-    }
     struct FDCLIENT* fdserver;
     if (remainfdclienthead) { // 有存货，直接拿出来用
         fdserver = remainfdclienthead;
