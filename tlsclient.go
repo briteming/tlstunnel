@@ -10,6 +10,7 @@ import (
 )
 
 var key = "ooEjjewSbQisrKA7Zb7XBrrrHSSO20xs"
+var serverhost = "192.168.56.101"
 
 func main () {
     runtime.GOMAXPROCS(1)
@@ -22,7 +23,7 @@ func main () {
         log.Panic(err)
     }
 
-    go handleAcceptRequest(ln, "192.168.56.101:443")
+    go handleAcceptRequest(ln, serverhost + ":443")
 
     ln, err = net.Listen("tcp", ":1083")
     if err != nil {
@@ -40,7 +41,7 @@ func main () {
             log.Println(err)
             continue
         }
-        go handleClientRequest(client, "192.168.56.101:8443")
+        go handleClientRequest(client, serverhost + ":8443")
     }
 }
 
